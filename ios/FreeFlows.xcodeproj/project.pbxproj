@@ -1,31 +1,31 @@
 // !$*UTF8*$!
 {archiveVersion = 1; classes = {}; objectVersion = 56; objects = {
-ADEB72C74109CB9EE5EF47DE = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaView.swift; sourceTree = "<group>";}
-3EB65466CBE8F107B82BED6B = {isa = PBXBuildFile; fileRef = ADEB72C74109CB9EE5EF47DE;}
-99946669BBE4D26F005E4063 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeFlowsApp.swift; sourceTree = "<group>";}
-F55F31AF80034A5FE463AC2C = {isa = PBXBuildFile; fileRef = 99946669BBE4D26F005E4063;}
-BE26416832C4595F0973D52D = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>";}
-FD825685184AF3166D56C1B1 = {isa = PBXBuildFile; fileRef = BE26416832C4595F0973D52D;}
-EF419137D18DBC58F3D59BF9 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeAudio.swift; sourceTree = "<group>";}
-07AB322930FFC699A2233E4A = {isa = PBXBuildFile; fileRef = EF419137D18DBC58F3D59BF9;}
-41FD144B06AAE8D3BF30DBCC = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomAPI.swift; sourceTree = "<group>";}
-8AB3E675B35DE5DDF3801B3B = {isa = PBXBuildFile; fileRef = 41FD144B06AAE8D3BF30DBCC;}
-5C49F6D8B109A184968CAC18 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomModel.swift; sourceTree = "<group>";}
-88F1AE2ACD7FF4811A4618B9 = {isa = PBXBuildFile; fileRef = 5C49F6D8B109A184968CAC18;}
-9CEEC13202AFBF12EE3ABB99 = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>";}
-A8792157CB4F27FB949C035F = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreeFlows.app; sourceTree = BUILT_PRODUCTS_DIR;}
-878A52FC5FF6A57D50B7B870 = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (3EB65466CBE8F107B82BED6B,F55F31AF80034A5FE463AC2C,FD825685184AF3166D56C1B1,07AB322930FFC699A2233E4A,8AB3E675B35DE5DDF3801B3B,88F1AE2ACD7FF4811A4618B9); runOnlyForDeploymentPostprocessing = 0;}
-E2AA269EB967A8853A258BFA = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0;}
-41D311A605520FC7B8B9A980 = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0;}
-F810A3947224DC074E90BB0D = {isa = PBXGroup; children = (ADEB72C74109CB9EE5EF47DE,99946669BBE4D26F005E4063,BE26416832C4595F0973D52D,EF419137D18DBC58F3D59BF9,41FD144B06AAE8D3BF30DBCC,5C49F6D8B109A184968CAC18,9CEEC13202AFBF12EE3ABB99); path = FreeFlows; sourceTree = "<group>";}
-1BB21EFB7C988A9DE171E099 = {isa = PBXGroup; children = (A8792157CB4F27FB949C035F); name = Products; sourceTree = "<group>";}
-66474652908ED2E0775E04A9 = {isa = PBXGroup; children = (F810A3947224DC074E90BB0D,1BB21EFB7C988A9DE171E099); sourceTree = "<group>";}
-73EBF6644258C120893E685D = {isa = XCBuildConfiguration; buildSettings = {CLANG_ENABLE_MODULES = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; SDKROOT = iphoneos; SWIFT_VERSION = 5.0;SWIFT_OPTIMIZATION_LEVEL = "-Onone"; DEBUG_INFORMATION_FORMAT = dwarf; SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;}; name = Debug;}
-0B0C687DF8B6B8DC790B519C = {isa = XCBuildConfiguration; buildSettings = {CLANG_ENABLE_MODULES = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; SDKROOT = iphoneos; SWIFT_VERSION = 5.0;SWIFT_OPTIMIZATION_LEVEL = "-O"; DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";}; name = Release;}
-187B327489003FCA55B00C62 = {isa = XCConfigurationList; buildConfigurations = (73EBF6644258C120893E685D,0B0C687DF8B6B8DC790B519C); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release;}
-B00CCDD09424E369308D67FA = {isa = XCBuildConfiguration; buildSettings = {CODE_SIGN_STYLE = Automatic; DEVELOPMENT_TEAM = ""; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = FreeFlows/Info.plist; PRODUCT_BUNDLE_IDENTIFIER = com.freeflows.iphone.test; PRODUCT_NAME = "$(TARGET_NAME)"; TARGETED_DEVICE_FAMILY = 1; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_EMIT_LOC_STRINGS = YES; MARKETING_VERSION = 0.1.0; CURRENT_PROJECT_VERSION = 1; ENABLE_USER_SCRIPT_SANDBOXING = YES;SWIFT_OPTIMIZATION_LEVEL = "-Onone"; DEBUG_INFORMATION_FORMAT = dwarf; SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;}; name = Debug;}
-1B104479E55E37CF8A63CBDF = {isa = XCBuildConfiguration; buildSettings = {CODE_SIGN_STYLE = Automatic; DEVELOPMENT_TEAM = ""; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = FreeFlows/Info.plist; PRODUCT_BUNDLE_IDENTIFIER = com.freeflows.iphone.test; PRODUCT_NAME = "$(TARGET_NAME)"; TARGETED_DEVICE_FAMILY = 1; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_EMIT_LOC_STRINGS = YES; MARKETING_VERSION = 0.1.0; CURRENT_PROJECT_VERSION = 1; ENABLE_USER_SCRIPT_SANDBOXING = YES;SWIFT_OPTIMIZATION_LEVEL = "-O"; DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";}; name = Release;}
-4C22169D0A9D428D8484661E = {isa = XCConfigurationList; buildConfigurations = (B00CCDD09424E369308D67FA,1B104479E55E37CF8A63CBDF); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release;}
-34A04005BCAF206EEC990BD9 = {isa = PBXNativeTarget; buildConfigurationList = 4C22169D0A9D428D8484661E; buildPhases = (878A52FC5FF6A57D50B7B870,E2AA269EB967A8853A258BFA,41D311A605520FC7B8B9A980); buildRules = (); dependencies = (); name = FreeFlows; productName = FreeFlows; productReference = A8792157CB4F27FB949C035F; productType = "com.apple.product-type.application";}
-244210E48437B6556980A702 = {isa = PBXProject; attributes = {BuildIndependentTargetsInParallel = YES; LastUpgradeCheck = 1600; TargetAttributes = {34A04005BCAF206EEC990BD9 = {CreatedOnToolsVersion = 16.0; ProvisioningStyle = Automatic;};};}; buildConfigurationList = 187B327489003FCA55B00C62; compatibilityVersion = "Xcode 14.0"; developmentRegion = pt_BR; hasScannedForEncodings = 0; knownRegions = (pt_BR,en,Base); mainGroup = 66474652908ED2E0775E04A9; productRefGroup = 1BB21EFB7C988A9DE171E099; projectDirPath = ""; projectRoot = ""; targets = (34A04005BCAF206EEC990BD9);}
+ADEB72C74109CB9EE5EF47DE = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArenaView.swift; sourceTree = "<group>";};
+3EB65466CBE8F107B82BED6B = {isa = PBXBuildFile; fileRef = ADEB72C74109CB9EE5EF47DE;};
+99946669BBE4D26F005E4063 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeFlowsApp.swift; sourceTree = "<group>";};
+F55F31AF80034A5FE463AC2C = {isa = PBXBuildFile; fileRef = 99946669BBE4D26F005E4063;};
+BE26416832C4595F0973D52D = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>";};
+FD825685184AF3166D56C1B1 = {isa = PBXBuildFile; fileRef = BE26416832C4595F0973D52D;};
+EF419137D18DBC58F3D59BF9 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NativeAudio.swift; sourceTree = "<group>";};
+07AB322930FFC699A2233E4A = {isa = PBXBuildFile; fileRef = EF419137D18DBC58F3D59BF9;};
+41FD144B06AAE8D3BF30DBCC = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomAPI.swift; sourceTree = "<group>";};
+8AB3E675B35DE5DDF3801B3B = {isa = PBXBuildFile; fileRef = 41FD144B06AAE8D3BF30DBCC;};
+5C49F6D8B109A184968CAC18 = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomModel.swift; sourceTree = "<group>";};
+88F1AE2ACD7FF4811A4618B9 = {isa = PBXBuildFile; fileRef = 5C49F6D8B109A184968CAC18;};
+9CEEC13202AFBF12EE3ABB99 = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>";};
+A8792157CB4F27FB949C035F = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FreeFlows.app; sourceTree = BUILT_PRODUCTS_DIR;};
+878A52FC5FF6A57D50B7B870 = {isa = PBXSourcesBuildPhase; buildActionMask = 2147483647; files = (3EB65466CBE8F107B82BED6B,F55F31AF80034A5FE463AC2C,FD825685184AF3166D56C1B1,07AB322930FFC699A2233E4A,8AB3E675B35DE5DDF3801B3B,88F1AE2ACD7FF4811A4618B9); runOnlyForDeploymentPostprocessing = 0;};
+E2AA269EB967A8853A258BFA = {isa = PBXFrameworksBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0;};
+41D311A605520FC7B8B9A980 = {isa = PBXResourcesBuildPhase; buildActionMask = 2147483647; files = (); runOnlyForDeploymentPostprocessing = 0;};
+F810A3947224DC074E90BB0D = {isa = PBXGroup; children = (ADEB72C74109CB9EE5EF47DE,99946669BBE4D26F005E4063,BE26416832C4595F0973D52D,EF419137D18DBC58F3D59BF9,41FD144B06AAE8D3BF30DBCC,5C49F6D8B109A184968CAC18,9CEEC13202AFBF12EE3ABB99); path = FreeFlows; sourceTree = "<group>";};
+1BB21EFB7C988A9DE171E099 = {isa = PBXGroup; children = (A8792157CB4F27FB949C035F); name = Products; sourceTree = "<group>";};
+66474652908ED2E0775E04A9 = {isa = PBXGroup; children = (F810A3947224DC074E90BB0D,1BB21EFB7C988A9DE171E099); sourceTree = "<group>";};
+73EBF6644258C120893E685D = {isa = XCBuildConfiguration; buildSettings = {CLANG_ENABLE_MODULES = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; SDKROOT = iphoneos; SWIFT_VERSION = 5.0;SWIFT_OPTIMIZATION_LEVEL = "-Onone"; DEBUG_INFORMATION_FORMAT = dwarf; SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;}; name = Debug;};
+0B0C687DF8B6B8DC790B519C = {isa = XCBuildConfiguration; buildSettings = {CLANG_ENABLE_MODULES = YES; IPHONEOS_DEPLOYMENT_TARGET = 17.0; SDKROOT = iphoneos; SWIFT_VERSION = 5.0;SWIFT_OPTIMIZATION_LEVEL = "-O"; DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";}; name = Release;};
+187B327489003FCA55B00C62 = {isa = XCConfigurationList; buildConfigurations = (73EBF6644258C120893E685D,0B0C687DF8B6B8DC790B519C); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release;};
+B00CCDD09424E369308D67FA = {isa = XCBuildConfiguration; buildSettings = {CODE_SIGN_STYLE = Automatic; DEVELOPMENT_TEAM = ""; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = FreeFlows/Info.plist; PRODUCT_BUNDLE_IDENTIFIER = com.freeflows.iphone.test; PRODUCT_NAME = "$(TARGET_NAME)"; TARGETED_DEVICE_FAMILY = 1; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_EMIT_LOC_STRINGS = YES; MARKETING_VERSION = 0.1.0; CURRENT_PROJECT_VERSION = 1; ENABLE_USER_SCRIPT_SANDBOXING = YES;SWIFT_OPTIMIZATION_LEVEL = "-Onone"; DEBUG_INFORMATION_FORMAT = dwarf; SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;}; name = Debug;};
+1B104479E55E37CF8A63CBDF = {isa = XCBuildConfiguration; buildSettings = {CODE_SIGN_STYLE = Automatic; DEVELOPMENT_TEAM = ""; GENERATE_INFOPLIST_FILE = NO; INFOPLIST_FILE = FreeFlows/Info.plist; PRODUCT_BUNDLE_IDENTIFIER = com.freeflows.iphone.test; PRODUCT_NAME = "$(TARGET_NAME)"; TARGETED_DEVICE_FAMILY = 1; SUPPORTED_PLATFORMS = "iphoneos iphonesimulator"; SWIFT_EMIT_LOC_STRINGS = YES; MARKETING_VERSION = 0.1.0; CURRENT_PROJECT_VERSION = 1; ENABLE_USER_SCRIPT_SANDBOXING = YES;SWIFT_OPTIMIZATION_LEVEL = "-O"; DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";}; name = Release;};
+4C22169D0A9D428D8484661E = {isa = XCConfigurationList; buildConfigurations = (B00CCDD09424E369308D67FA,1B104479E55E37CF8A63CBDF); defaultConfigurationIsVisible = 0; defaultConfigurationName = Release;};
+34A04005BCAF206EEC990BD9 = {isa = PBXNativeTarget; buildConfigurationList = 4C22169D0A9D428D8484661E; buildPhases = (878A52FC5FF6A57D50B7B870,E2AA269EB967A8853A258BFA,41D311A605520FC7B8B9A980); buildRules = (); dependencies = (); name = FreeFlows; productName = FreeFlows; productReference = A8792157CB4F27FB949C035F; productType = "com.apple.product-type.application";};
+244210E48437B6556980A702 = {isa = PBXProject; attributes = {BuildIndependentTargetsInParallel = YES; LastUpgradeCheck = 1600; TargetAttributes = {34A04005BCAF206EEC990BD9 = {CreatedOnToolsVersion = 16.0; ProvisioningStyle = Automatic;};};}; buildConfigurationList = 187B327489003FCA55B00C62; compatibilityVersion = "Xcode 14.0"; developmentRegion = pt_BR; hasScannedForEncodings = 0; knownRegions = (pt_BR,en,Base); mainGroup = 66474652908ED2E0775E04A9; productRefGroup = 1BB21EFB7C988A9DE171E099; projectDirPath = ""; projectRoot = ""; targets = (34A04005BCAF206EEC990BD9);};
 }; rootObject = 244210E48437B6556980A702; }
