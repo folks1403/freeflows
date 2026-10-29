@@ -1,0 +1,45 @@
+name: Build iPhone test IPA (unsigned)
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'ios/**'
+      - '.github/workflows/iphone-test.yml'
+permissions:
+  contents: read
+concurrency:
+  group: iphone-test-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  iphone:
+    runs-on: macos-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile for a physical iPhone, without signing credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcodebuild -project ios/FreeFlows.xcodeproj -scheme FreeFlows \
+            -configuration Release -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGN_IDENTITY='' build
+      - name: Check device platform and package IPA
+        shell: bash
+        run: |
+          set -euo pipefail
+          app='build/Build/Products/Release-iphoneos/FreeFlows.app'
+          test -d "$app"
+          platform=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleSupportedPlatforms:0' "$app/Info.plist")
+          test "$platform" = 'iPhoneOS'
+          mkdir -p package/Payload
+          cp -R "$app" package/Payload/
+          cd package
+          zip -qr ../FreeFlows-unsigned.ipa Payload
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FreeFlows-iPhone-unsigned
+          path: FreeFlows-unsigned.ipa
+          if-no-files-found: error
+          retention-days: 3
