@@ -1,6 +1,6 @@
 # Free Flows — app nativo para iPhone
 
-**Entrega: projeto-fonte iOS em SwiftUI, ainda não compilado no Xcode e não instalado no iPhone.** Não é um site, PWA ou WebView. Este pacote não contém `.ipa`, assinatura Apple ou certificado. O computador usado nesta criação é Windows e não tem Xcode/SDK iOS.
+**Entrega: projeto nativo SwiftUI compilado com sucesso para iPhone real (arm64, iOS 17+), ainda sem assinatura e sem teste no aparelho.** Não usa navegador embutido. O IPA sem assinatura está no artefato do GitHub Actions, não no código do repositório. Nenhum certificado ou credencial Apple foi incluído. A compilação foi executada em um Mac do GitHub, mantendo o desenvolvimento local no Windows.
 
 ## O que foi implementado no código
 
@@ -15,7 +15,7 @@
 - Credenciais de sala no Keychain; nenhuma chave Gemini no app. As duas chaves permanecem no servidor.
 - Pausa de áudio ao ir para segundo plano e ação explícita para retomá-lo. A tela permanece acordada enquanto o áudio estiver ativo.
 
-Esses itens descrevem implementação no fonte, não recursos validados num aparelho. Compilação e testes reais ainda são necessários.
+Esses itens descrevem implementação compilada, não recursos validados num aparelho. Assinatura, instalação e testes reais ainda são necessários.
 
 ## Como chegar à primeira instalação
 
@@ -25,15 +25,15 @@ O caminho oficial de teste pessoal usa um **Mac com Xcode e uma Apple Account**.
 2. No target **FreeFlows > Signing & Capabilities**, escolha sua equipe. Para teste pessoal, a Apple oferece o fluxo de Personal Team, sujeito aos seus limites. Use um Bundle Identifier único se o exemplo `com.freeflows.iphone.test` não estiver disponível.
 3. Conecte o iPhone ao Mac, desbloqueie-o e siga os avisos normais de confiança e Developer Mode que o Xcode/Apple solicitarem. Faça login e alterações de segurança pessoalmente; não compartilhe senha, certificados ou códigos no chat.
 4. Escolha o iPhone como destino e clique em **Run**. O projeto mira **iPhone com iOS 17 ou superior**, em retrato.
-5. Corrija qualquer erro de compilação diagnosticado pelo Xcode antes de tentar a instalação. Esta entrega não foi submetida ao compilador/SDK da Apple.
+5. Corrija qualquer erro de compilação diagnosticado pelo Xcode antes de tentar a instalação. A compilação Release passou no Xcode 26.6 com SDK iPhoneOS 26.5, no GitHub Actions; testes físicos seguem pendentes.
 
 Referências oficiais: [executar no aparelho](https://help.apple.com/xcode/mac/current/en.lproj/dev5a825a1ca.html), [assinatura e Personal Team](https://help.apple.com/xcode/mac/current/en.lproj/dev60b6fbbc7.html), [Developer Mode](https://developer.apple.com/documentation/xcode/enabling-developer-mode-on-a-device/).
 
 ### Só tenho Windows
 
-Você pode manter o servidor no Windows e preparar/editar o código. Para produzir o app do iPhone ainda será necessária uma etapa macOS + assinatura. O arquivo `ci/macos-build.workflow.yml` é um exemplo **manual**, não ativado, que pode ser colocado num repositório GitHub em `.github/workflows/` para tentar a compilação em um runner macOS. Limites/custos dependem da sua conta; nenhuma execução foi criada aqui.
+Você pode manter o servidor no Windows e preparar/editar o código. Para produzir o app do iPhone ainda será necessária uma etapa macOS + assinatura. Neste repositório, `.github/workflows/iphone-test.yml` compila no macOS do GitHub e empacota o IPA físico sem assinatura. Uma execução já foi aprovada. Consulte `COMPILAR.md` para baixar o artefato e preparar a assinatura. Limites/custos dependem da conta GitHub.
 
-Essa compilação é para simulador e **sem assinatura**: ela não gera um app instalável no seu iPhone. A assinatura/distribuição é uma etapa adicional que requer as credenciais e o fluxo Apple apropriados. Não foi configurado TestFlight, App Store, instalação alternativa ou geração de IPA assinada.
+O workflow deste repositório compila para **aparelho real, sem assinatura**: gera um IPA que ainda precisa ser assinado para instalar. A assinatura/distribuição é uma etapa adicional que requer as credenciais e o fluxo Apple apropriados. Não foi configurado TestFlight, App Store, instalação alternativa ou geração de IPA assinada.
 
 ## Depois de instalar
 
@@ -89,7 +89,7 @@ Verificações concluídas no Windows:
 - `Info.plist` e scheme validados como XML; referências internas do projeto Xcode conferidas.
 - Novo servidor respondeu por HTTPS e anunciou o protocolo nativo. As duas conexões Gemini estavam configuradas no status, sem expor segredos.
 
-**Não foram verificados**: compilação Swift com SDK da Apple, assinatura, instalação, layout no iPhone, permissão de microfone real, duplex, volume, Bluetooth, roteamento, latência, sincronismo do beat, qualidade da transcrição/julgamento e reconhecimento de entradas. Parsing Swift não comprova que tipos e APIs compilam no Xcode. Nenhum app foi instalado nem executado no aparelho conectado.
+**Não foram verificados**: assinatura, instalação, layout no iPhone, permissão de microfone real, duplex, volume, Bluetooth, roteamento, latência, sincronismo do beat, qualidade da transcrição/julgamento e reconhecimento de entradas. Além do parsing, o build físico do Xcode foi aprovado: https://github.com/folks1403/freeflows/actions/runs/40862287099 . Isso não valida o comportamento em aparelho real. Nenhum app foi instalado nem executado no aparelho conectado.
 
 Não há suporte garantido a segundo plano, chamadas telefônicas/interrupções, troca de rota sem retomar áudio, reconexão persistente da batalha após reiniciar o servidor, gravação da tela dentro do app ou operação de campeonato público. Para gravar um teste, use a gravação de tela do iOS e verifique se sua voz/som do app entraram no vídeo; isso também precisa de validação no aparelho.
 
