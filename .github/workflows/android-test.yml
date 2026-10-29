@@ -25,6 +25,19 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.11.1'
+      - name: Restore private test signing identity
+        env:
+          KEYSTORE_B64: ${{ secrets.ANDROID_DEBUG_KEYSTORE_B64 }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ -z "$KEYSTORE_B64" ]; then
+            echo 'Missing repository test signing secret.' >&2
+            exit 1
+          fi
+          umask 077
+          printf '%s' "$KEYSTORE_B64" | base64 --decode > "$RUNNER_TEMP/freeflows-debug.p12"
+          echo "ANDROID_DEBUG_KEYSTORE_PATH=$RUNNER_TEMP/freeflows-debug.p12" >> "$GITHUB_ENV"
       - name: Build, test protocol and lint
         working-directory: android
         run: gradle --no-daemon :app:testDebugUnitTest :app:lintDebug :app:assembleDebug :app:assembleDebugAndroidTest
@@ -44,3 +57,7 @@ jobs:
             android/app/build/reports/tests/
             android/app/build/reports/lint-results-debug.html
           if-no-files-found: warn
+      - name: Remove temporary signing key
+        if: always()
+        shell: bash
+        run: rm -f "$RUNNER_TEMP/freeflows-debug.p12"

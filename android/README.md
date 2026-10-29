@@ -35,3 +35,5 @@ Sem serviço de áudio em segundo plano, hospedagem permanente nem promessa de l
 Os testes do protocolo verificam convites HTTPS sem credenciais na URL, remoção do token de criador ao compartilhar, formato WAV e segmentação por voz/pausa. Não medem qualidade de transcrição nem julgamento real. Nenhuma chave de IA pertence ao APK; as credenciais continuam no servidor.
 
 Um APK debug serve para testes, não para Play Store. Atualizações exigem a mesma chave de assinatura. Não desinstale uma versão com dados para contornar uma assinatura diferente.
+
+A identidade de assinatura de teste é restaurada do segredo ANDROID_DEBUG_KEYSTORE_B64 do repositório; a chave privada não é incluída no código nem nos artefatos. Para compilar localmente com a mesma identidade, defina ANDROID_DEBUG_KEYSTORE_PATH apontando para a cópia privada PKCS12. As senhas padrão android servem apenas para essa chave de desenvolvimento; não reutilize em produção. Perder/substituir a chave impede atualizar instalações anteriores com a mesma identidade. Pull requests de forks sem acesso ao segredo precisam de uma configuração separada de build de validação.
