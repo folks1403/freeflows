@@ -1,0 +1,80 @@
+name: Build iPhone test IPA (unsigned)
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - 'ios/**'
+      - '.github/workflows/iphone-test.yml'
+permissions:
+  contents: read
+concurrency:
+  group: iphone-test-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  iphone:
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile for a physical iPhone, without signing credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcodebuild -project ios/FreeFlows.xcodeproj -scheme FreeFlows \
+            -configuration Release -sdk iphoneos \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO CODE_SIGN_IDENTITY='' build
+      - name: Check device platform and package IPA
+        shell: bash
+        run: |
+          set -euo pipefail
+          app='build/Build/Products/Release-iphoneos/FreeFlows.app'
+          test -d "$app"
+          platform=$(/usr/libexec/PlistBuddy -c 'Print :CFBundleSupportedPlatforms:0' "$app/Info.plist")
+          test "$platform" = 'iPhoneOS'
+          mkdir -p package/Payload
+          cp -R "$app" package/Payload/
+          cd package
+          zip -qr ../FreeFlows-unsigned.ipa Payload
+      - uses: actions/upload-artifact@v4
+        with:
+          name: FreeFlows-iPhone-unsigned
+          path: FreeFlows-unsigned.ipa
+          if-no-files-found: error
+          retention-days: 3
+  simulator:
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build and launch on an available iPhone simulator
+        shell: bash
+        run: |
+          set -euo pipefail
+          xcodebuild -version
+          xcodebuild -project ios/FreeFlows.xcodeproj -scheme FreeFlows \
+            -configuration Debug -sdk iphonesimulator \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath build-simulator CODE_SIGNING_ALLOWED=NO build
+          device=$(xcrun simctl list devices available --json | python3 -c '
+          import json, sys
+          devices = json.load(sys.stdin)["devices"]
+          phones = [d["udid"] for runtime, group in devices.items() if ".iOS-" in runtime for d in group if d.get("isAvailable") and d["name"].startswith("iPhone")]
+          if not phones: sys.exit("No available iPhone simulator")
+          print(phones[0])')
+          xcrun simctl boot "$device"
+          xcrun simctl bootstatus "$device" -b
+          xcrun simctl install "$device" build-simulator/Build/Products/Debug-iphonesimulator/FreeFlows.app
+          xcrun simctl launch "$device" com.freeflows.iphone.test
+          sleep 10
+          # Terminate fails if the app has already crashed: this is a startup smoke test.
+          xcrun simctl io "$device" screenshot simulator-startup.png
+          xcrun simctl terminate "$device" com.freeflows.iphone.test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: FreeFlows-simulator-startup
+          path: simulator-startup.png
+          if-no-files-found: warn
+          retention-days: 3
