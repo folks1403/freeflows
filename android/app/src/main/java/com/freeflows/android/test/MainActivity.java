@@ -83,8 +83,10 @@ public class MainActivity extends Activity {
         root.setPadding(dp(22), dp(30), dp(22), dp(36)); root.setBackgroundColor(Color.rgb(10, 12, 18));
         scroll.addView(root); setContentView(scroll);
         root.setOnApplyWindowInsetsListener((v, insets) -> {
-            android.graphics.Insets bars = Build.VERSION.SDK_INT >= 30 ? insets.getInsets(WindowInsets.Type.systemBars()) : null;
-            if (bars != null) root.setPadding(dp(22), dp(20) + bars.top, dp(22), dp(24) + bars.bottom);
+            if (Build.VERSION.SDK_INT >= 30) {
+                android.graphics.Insets bars = insets.getInsets(WindowInsets.Type.systemBars());
+                root.setPadding(dp(22), dp(20) + bars.top, dp(22), dp(24) + bars.bottom);
+            }
             return insets;
         });
         label("FREE FLOWS", 29, Color.rgb(255, 121, 72));
