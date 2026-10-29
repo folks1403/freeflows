@@ -165,11 +165,13 @@ public class MainActivity extends Activity {
         } catch (Exception e) { message(e.getMessage()); }
     }
     private JSONObject request(String path, JSONObject body) throws Exception {
-        RoomLink connection = link;
+        return request(link, token, path, body);
+    }
+    private JSONObject request(RoomLink connection, String auth, String path, JSONObject body) throws Exception {
         if (connection == null) throw new IOException("Entre na sala primeiro.");
         Request.Builder builder = new Request.Builder().url(connection.base + "/" + path);
         if (body != null) builder.post(RequestBody.create(body.toString(), MediaType.get("application/json; charset=utf-8")));
-        if (!token.isEmpty()) builder.header("Authorization", "Bearer " + token);
+        if (!auth.isEmpty()) builder.header("Authorization", "Bearer " + auth);
         if (!connection.control.isEmpty()) builder.header("X-Host-Token", connection.control);
         try (Response response = http.newCall(builder.build()).execute()) {
             JSONObject result;
@@ -177,7 +179,7 @@ public class MainActivity extends Activity {
             try { result = new JSONObject(text); }
             catch (JSONException e) { throw new IOException("Servidor indisponível. Confira o convite atual da sala."); }
             if (!response.isSuccessful()) {
-                if (path.equals("poll") && (response.code() == 401 || response.code() == 403 || response.code() == 404)) { token = ""; id = ""; }
+                if (connection == link && auth.equals(token) && path.equals("poll") && (response.code() == 401 || response.code() == 403 || response.code() == 404)) { token = ""; id = ""; }
                 throw new IOException(result.optString("error", "Erro HTTP " + response.code()));
             }
             return result;
@@ -329,7 +331,7 @@ public class MainActivity extends Activity {
             pending.add(segment); pendingBytes += segment.wav().length;
             if (draining) return; draining = true;
         }
-        int owner = generation;
+        int owner = generation; RoomLink connection = link; String auth = token;
         upload.execute(() -> {
             try {
                 while (owner == generation) {
@@ -339,7 +341,7 @@ public class MainActivity extends Activity {
                     boolean delivered = false;
                     for (int attempt = 0; attempt < 3 && owner == generation; attempt++) {
                         try {
-                            request("audio", obj("turnId", next.turnId(), "chunkIndex", next.index(), "speechEnded", next.ended(),
+                            request(connection, auth, "audio", obj("turnId", next.turnId(), "chunkIndex", next.index(), "speechEnded", next.ended(),
                                 "mimeType", "audio/wav", "data", android.util.Base64.encodeToString(next.wav(), android.util.Base64.NO_WRAP)));
                             delivered = true; break;
                         } catch (Exception e) {
@@ -426,9 +428,13 @@ public class MainActivity extends Activity {
     private interface Task { void run() throws Exception; }
     private void runTask(Task task) {
         int owner = generation;
-        network.execute(() -> { try { task.run(); } catch (Exception e) { ui.post(() -> { if (owner == generation) message(safeError(e)); }); } });
+        network.execute(() -> { if (owner != generation) return; try { task.run(); } catch (Exception e) { ui.post(() -> { if (owner == generation) message(safeError(e)); }); } });
     }
-    private void runAction(String path, JSONObject body) { runTask(() -> request(path, body)); }
+    private void runAction(String path, JSONObject body) {
+        RoomLink connection = link; String auth = token; int owner = generation;
+        network.execute(() -> { try { request(connection, auth, path, body); }
+            catch (Exception e) { ui.post(() -> { if (owner == generation) message(safeError(e)); }); } });
+    }
     private static String safeError(Exception e) {
         return e instanceof IOException && e.getMessage() != null && !e.getMessage().contains("https://") ? e.getMessage() : "Não foi possível conectar. Confira a rede e o convite atual.";
     }

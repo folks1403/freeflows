@@ -1,5 +1,7 @@
 plugins { id 'com.android.application' }
 android {
+    useLibrary 'android.test.runner'
+    useLibrary 'android.test.base'
     namespace 'com.freeflows.android.test'
     compileSdk 35
     defaultConfig {
